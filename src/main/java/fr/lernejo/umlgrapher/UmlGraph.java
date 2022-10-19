@@ -1,5 +1,7 @@
 package fr.lernejo.umlgrapher;
 
+import java.lang.reflect.Modifier;
+
 public class UmlGraph {
     private final Class[] classes;
 
@@ -8,14 +10,18 @@ public class UmlGraph {
     }
 
     public String as(GraphType graphType) {
-        String result = "";
-        if (graphType == GraphType.Mermaid) {
-            try {
+        return this.getMermaidSyntax();
+    }
 
-            } catch (RuntimeException e) {
-                System.out.println("Error: " + e.getClass() + " - " + e.getMessage());
+    private String getMermaidSyntax() {
+        String syntax = "classDiagram\n";
+        for (Class classe : this.classes) {
+            syntax += "class " + classe.getSimpleName() + " {\n";
+            if (Modifier.isInterface(classe.getModifiers())) {
+                syntax +="    <<interface>>\n";
             }
+            syntax += "}\n";
         }
-        return result;
+        return syntax;
     }
 }
