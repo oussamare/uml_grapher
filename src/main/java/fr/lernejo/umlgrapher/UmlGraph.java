@@ -1,21 +1,21 @@
 package fr.lernejo.umlgrapher;
 
 public class UmlGraph {
-    private final Class class_name;
-    public UmlGraph(Class class_name){
-        this.class_name = class_name;
+    private final Class[] classes;
+
+    public UmlGraph(Class[] classes) {
+        this.classes = classes;
     }
-    public String as(GraphType graphType){
-        String chaine = "classDiagram\n";
-        switch(graphType) {
-            case Mermaid:
-                chaine = chaine + "class "+this.class_name.getSimpleName()+" {\n";
-                if(this.class_name.isInterface()){
-                    chaine = chaine + "    <<interface>>\n";
-                }
-                chaine = chaine + "}\n";
-                break;
+
+    public String as(GraphType graphType) {
+        String result = "";
+        if (graphType == GraphType.Mermaid) {
+            try {
+
+            } catch (RuntimeException e) {
+                System.out.println("Error: " + e.getClass() + " - " + e.getMessage());
+            }
         }
-        return chaine;
+        return result;
     }
 }
