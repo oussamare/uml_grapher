@@ -59,20 +59,31 @@ class UmlGraphTests {
             """);
     }
 
-
-
     @Test
-    void class_with_relation() {
-        Class[] classes = new Class[]{parent.children.class};
+    void class_without_relation() {
+        Class[] classes = new Class[]{School.Second.Student.class};
         UmlGraph graph = new UmlGraph(classes);
 
         String output = graph.as(GraphType.Mermaid);
 
         Assertions.assertThat(output).isEqualTo("""
             classDiagram
-            class parent
-            class children
-            parent <|-- children : extends
+            class Student
+            """);
+    }
+
+    @Test
+    void class_with_relation() {
+        Class[] classes = new Class[]{Car.Ferrari.class};
+        UmlGraph graph = new UmlGraph(classes);
+
+        String output = graph.as(GraphType.Mermaid);
+
+        Assertions.assertThat(output).isEqualTo("""
+            classDiagram
+            class Car
+            class Ferrari
+            Car <|-- Ferrari : extends
             """);
     }
 
@@ -148,11 +159,18 @@ class UmlGraphTests {
         }
     }
 
-    public class parent {
-        public class children extends parent {
+    public class School {
+        public class Second {
+            public class Student {
+
+            }
         }
     }
 
+    public class Car {
+        public class Ferrari extends Car {
+        }
+    }
 
     public static class Singleton {
 
