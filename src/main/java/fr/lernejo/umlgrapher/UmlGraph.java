@@ -11,10 +11,13 @@ public class UmlGraph {
     public String as(GraphType graphType) {
         String resulta = "";
         if (graphType == GraphType.Mermaid) {
-            InternalGraphRepresentation graph = new InternalGraphRepresentation(classes);
-            resulta = new MermaidFormatter().format(graph);
+            try {
+                InternalGraphRepresentation graph = new InternalGraphRepresentation(classes);
+                resulta = new MermaidFormatter().format(graph);
+            } catch (RuntimeException e) {
+                System.out.println("Error: " + e.getClass() + " - " + e.getMessage());
+            }
         }
-
         return resulta;
     }
 }

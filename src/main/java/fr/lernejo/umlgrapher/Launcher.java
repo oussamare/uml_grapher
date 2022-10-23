@@ -20,7 +20,11 @@ public class Launcher implements Callable<Integer> {
     }
 
     public static void main(String... args) {
+        try {
         int exitCode = new CommandLine(new Launcher()).execute(args);
         System.exit(exitCode);
+            } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
     }
 }

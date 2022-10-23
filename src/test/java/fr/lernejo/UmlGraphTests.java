@@ -82,6 +82,7 @@ public class UmlGraphTests {
     interface Machin {
         }
 
+
     public sealed interface Living {
         sealed interface Animal extends Living {
             final class Ant implements Animal {
@@ -99,7 +100,7 @@ public class UmlGraphTests {
         }
     }
 
-    
+
 
     public class parent {
         public class child extends parent {
